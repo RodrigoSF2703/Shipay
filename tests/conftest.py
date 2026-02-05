@@ -1,7 +1,7 @@
+# conftest.py
 import pytest
 from httpx import AsyncClient
-from main import app
-
+from main import app  # main.py está na raiz
 
 @pytest.fixture
 async def client():

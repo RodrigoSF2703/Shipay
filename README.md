@@ -37,7 +37,7 @@ O projeto foi estruturado utilizando FastAPI, SQLAlchemy assíncrono e PostgreSQ
 ## 📦 Estrutura do Projeto
 
 ```
-app/
+Shipay/
 ├── api/
 │   └── v1/
 │       ├── routes_users.py

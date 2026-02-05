@@ -2,7 +2,6 @@ import pytest
 from unittest.mock import AsyncMock, patch
 from datetime import date
 
-
 @pytest.mark.asyncio
 async def test_create_user_success(client):
     fake_user = {
@@ -20,13 +19,10 @@ async def test_create_user_success(client):
     }
 
     with patch(
-        "app.api.v1.routes_users.UserService.create_user",
+        "api.v1.routes_users.UserService.create_user",  # ajustado sem app
         new=AsyncMock(return_value=fake_user)
     ):
-        response = await client.post(
-            "/api/v1/users",
-            json=payload
-        )
+        response = await client.post("/api/v1/users", json=payload)
 
     assert response.status_code == 201
     assert response.json()["email"] == payload["email"]
@@ -42,13 +38,10 @@ async def test_create_user_email_already_exists(client):
     }
 
     with patch(
-        "app.api.v1.routes_users.UserService.create_user",
+        "api.v1.routes_users.UserService.create_user",
         new=AsyncMock(side_effect=ValueError("Email já cadastrado"))
     ):
-        response = await client.post(
-            "/api/v1/users",
-            json=payload
-        )
+        response = await client.post("/api/v1/users", json=payload)
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Email já cadastrado"
